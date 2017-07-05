@@ -1,0 +1,61 @@
+.navBar {
+  display: flex;
+  width: 100%;
+  border-bottom: 2px solid #4d4d4d;
+}
+
+.leftNav {
+  width: 49%;
+}
+
+.headerNav {
+  margin-top: 25px;
+  margin-bottom: 25px;
+  padding-left: 10px;
+  padding-right: 10px;
+  font-size: 20px;
+  border-left: 1px solid gray;
+  border-right: 1px solid gray;
+}
+
+.rightNav {
+  width: 49%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 650px;
+}
+
+.navBarLink {
+  text-decoration: none;
+  color: black;
+  margin-left: 45px;
+  height: 26px;
+  border-radius: 7px;
+  border: 1px solid black;
+  padding-right: 17px;
+}
+
+.navBarLink i {
+  padding: 5px;
+  border-radius: 6px;
+  border-right: 1px solid black;
+  margin-right: 15px;
+  background-color: #d3d3d3;
+}
+
+.profileModal {
+  display: flex;
+  flex-direction: column;
+  margin-left: 25px;
+  margin-right: 25px;
+  margin-top: 15px;
+  text-decoration: none;
+  color: black;
+  font-size: 12px;
+}
+
+.navBarProfilePic {
+  width: 32px;
+  height: 32px;
+}

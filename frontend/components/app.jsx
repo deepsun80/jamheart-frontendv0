@@ -1,9 +1,10 @@
 import React from 'react';
+import NavBarContainer from './nav_bar/nav_bar_container';
 
 const App = (props) => {
   return (
     <div className='app'>
-      <h1>JamHeart</h1>
+      <NavBarContainer />
       { props.children }
     </div>
   )
