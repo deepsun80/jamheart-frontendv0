@@ -14,7 +14,6 @@ class NavBar extends React.Component {
   }
 
   componentWillReceiveProps(newProps) {
-    debugger
     if(this.props.activeComponent !== newProps.activeComponent) {
       if(newProps.activeComponent === "dashboard") {
         this.resetButtons();

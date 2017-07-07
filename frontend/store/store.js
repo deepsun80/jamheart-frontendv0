@@ -6,7 +6,7 @@ function configureStore(preloadedState = {}){
   return createStore(
     rootReducer,
     preloadedState,
-    applyMiddleware(logger)
+    applyMiddleware()
   );
 }
 
