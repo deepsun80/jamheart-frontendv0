@@ -59,3 +59,29 @@
   width: 32px;
   height: 32px;
 }
+
+.navBarButton {
+  border: 1px solid black;
+  border-radius: 7px;
+  background-color: white;
+  padding: 0px;
+  padding-right: 17px;
+  height: 28px;
+  font-size: 16px;
+}
+
+.navBarButton:hover {
+  cursor: pointer;
+}
+
+.navBarButton:focus {
+  outline: none;
+}
+
+.navBarButton i {
+  padding: 5px;
+  border-radius: 6px;
+  border-right: 1px solid black;
+  margin-right: 15px;
+  background-color: #d3d3d3;
+}
