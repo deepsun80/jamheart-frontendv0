@@ -1,0 +1,13 @@
+.userAuth {
+  min-height: 56px;
+  padding: 20px;
+  margin-right: -45px;
+  display: flex;
+  justify-content: flex-end;
+}
+.userAuth button {
+  border: none !important;
+}
+.userAuth button:hover, .userAuth button:focus {
+  background-color: transparent !important;
+}

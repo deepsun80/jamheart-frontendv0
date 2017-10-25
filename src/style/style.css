@@ -1,0 +1,21 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 700;
+  width: 1280px;
+}
+
+a {
+  background-color: transparent !important;
+}
+a:hover {
+  color: black !important;
+}
+a:focus {
+  color: black !important;
+}
+
+.btn:focus,.btn:active {
+   outline: none !important;
+}

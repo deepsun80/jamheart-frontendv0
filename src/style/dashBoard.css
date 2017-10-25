@@ -1,0 +1,123 @@
+.dashBoard {
+  padding-left: 50px;
+}
+
+.dashBoard h1 {
+  text-align: left;
+  font-weight: 700;
+  font-size: 24px;
+  padding-left: 32px;
+}
+
+.dashBoardFirstRow {
+  padding-left: 32px;
+  padding-top: 28px;
+}
+
+.panel-default>.panel-heading {
+  border-color: #fafafa !important;
+  background-color: #fafafa !important;
+  min-height: 50px;
+  padding-top: 15px !important;
+}
+
+.dashBoardPanel {
+  width: 328px;
+  height: 296px; 
+}
+.dashBoardPanel:hover, .dashBoardSocialPanel:hover {
+  box-shadow: 0 4px 20px 0 rgba(0, 0, 0, 0.1);
+}
+
+.dashBoardSecondRow {
+  display: flex;
+  min-width: 101.5%;
+  margin-bottom: 75px;
+  margin-top: 32px;
+  margin-left: 15px;
+  justify-content: space-between;
+}
+
+.dashBoardSocialPanel {
+  width: 156px;
+}
+.facebookPanel {
+  background-image: linear-gradient(to top, #35589e, #607ab3);
+}
+.youtubePanel {
+  background-image: linear-gradient(to top, #d40c5b, #f63840);
+}
+.soundcloudPanel {
+  background-image: linear-gradient(to bottom, #ff7400, #ff0800);
+}
+.spotifyPanel {
+  background-image: linear-gradient(to bottom, #54fd90, #00e370);
+}
+.hypemachinePanel {
+  background-image: linear-gradient(to bottom, #e2ed66, #84d736);
+}
+
+.socialPanelHeader {
+  width: 156px;
+  height: 112px;
+}
+
+.socialPanelFooter .btn {
+  border-radius: 100px;
+  border: 1px solid #05ffe2;
+  color: #05ffe2;
+  font-size: 12px;
+  font-weight: 700;
+}
+.socialPanelFooter .btn:hover {
+  background-image: linear-gradient(to right, #8aefff, #00ffe1);
+  color: white;
+}
+.socialPanelFooter .btn:focus {
+  background-color: white !important;
+}
+.dashBoardSocialPanel .panel-footer {
+  background-color: white !important;
+}
+
+.socialPanelHeader .facebook-icon,  .socialPanelHeader .youtube-icon {
+  width: 78px;
+  height: 16px;
+  margin-left: 22px;
+  margin-top: 48px;
+}
+.socialPanelHeader .soundcloud-icon {
+  width: 60px;
+  height: 34px;
+  margin-left: 33px;
+  margin-top: 38px;
+}
+.socialPanelHeader .spotify-icon {
+  width: 78px;
+  height: 24px;
+  margin-left: 23px;
+  margin-top: 42px;
+}
+.socialPanelHeader .hype-machine-icon {
+  width: 41px;
+  height: 30px;
+  margin-left: 42px;
+  margin-top: 42px;
+}
+
+.viewAllButton {
+  border: none !important;
+  color: #05ffe2 !important;
+  /* margin-left: 15px; */
+}
+.viewAllButton:hover {
+  background-color: white !important;
+  background-image: none !important;
+  color: #007f70 !important;
+}
+
+.small-icon {
+  height: 16px;
+  margin-left: -6px;
+  margin-top: -12px; 
+}
