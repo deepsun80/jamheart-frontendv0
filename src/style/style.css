@@ -16,6 +16,6 @@ a:focus {
   color: black !important;
 }
 
-.btn:focus,.btn:active {
+.btn:focus, .btn:active {
    outline: none !important;
 }

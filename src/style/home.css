@@ -1,0 +1,79 @@
+.homeScreen {
+    width: 25%;
+    margin: auto;
+    margin-top: 135px;
+    text-align: center;
+}
+
+.homeScreen a {
+    text-decoration: none;
+}
+
+.signUpButton {
+    margin-top: 32px;
+    margin-bottom: 24px;
+    border-radius: 100px;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 30px;
+    background-image: linear-gradient(to right, #8aefff, #00ffe1);
+    color: white !important;
+}
+.signUpButton:hover, .signUpButton:focus {
+    background-image: linear-gradient(to right, #73c9d6, #00b79f);
+    color: white !important;
+}
+.signUpButton a {
+    color: white;
+}
+
+.fbSignUpButton {
+    margin-bottom: 12px;
+    border-radius: 100px;
+    border: none;
+    font-weight: 700;
+    font-size: 16px;
+    padding: 11px 30px;
+    background-image: linear-gradient(to top, #35589e, #607ab3);
+    color: white !important;
+}
+.fbSignUpButton:hover, .fbSignUpButton:focus {
+    background-image: linear-gradient(to right, #233966, #3f5072);
+    color: white !important;
+}
+.fbSignUpButton a {
+    color: white;
+}
+
+.line {
+    display: inline-block;
+    width: 60px;
+    height: 1px;
+    background-color: #d3d4d5;
+    margin-bottom: 3px;
+}
+.accountText {
+    display: inline-block;
+    font-size: 14px;
+    color: #d8d8d8;
+    padding: 14px;
+    margin-bottom: 12px;
+}
+
+.loginButton {
+    border-radius: 100px;
+    border: 1px solid #05ffe2;
+    color: #05ffe2;
+    font-size: 16px;
+    font-weight: 700;
+    padding: 11px 30px;
+}
+.loginButton:hover {
+    background-image: linear-gradient(to right, #8aefff, #00ffe1);
+    color: white !important;
+}
+.loginButton:focus {
+    background-color: white !important;
+}
+
