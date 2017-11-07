@@ -7,7 +7,9 @@ import registerServiceWorker from './registerServiceWorker';
 import { Provider } from 'react-redux';
 import { configureStore } from './store';
 
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
+import { Route, Switch } from 'react-router-dom';
+
+import { ConnectedRouter } from 'react-router-redux'
 
 import DashBoard from './components/DashBoard';
 import Feed from './components/Feed';
@@ -18,11 +20,13 @@ import Login from './components/form/Login';
 import SignUp from './components/form/SignUp';
 import PasswordReset from './components/form/PasswordReset';
 
+import history from './myHistory';
+
 const store = configureStore();
 
 ReactDOM.render(
         <Provider store={store}>
-          <BrowserRouter>
+          <ConnectedRouter history={history}>
             <Switch>
               <Route exact path="/" component={Home}/>
               <Route path="/login" component={Login}/>
@@ -33,7 +37,7 @@ ReactDOM.render(
               <Route path="/feed" component={Feed}/>
               <Route path="/youtube" component={YouTube}/>
             </Switch>
-          </BrowserRouter>
+          </ConnectedRouter>
         </Provider>,
     document.getElementById('root'));
 registerServiceWorker();
