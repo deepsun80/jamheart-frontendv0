@@ -76,7 +76,7 @@ class SignUp extends Component {
       .then (
         data => console.log(data)
       )
-    );
+  );
     // axios.post('http://localhost:8000/register', values, {
     //             headers: {'Content-Type': 'application/json'}
     //           })
