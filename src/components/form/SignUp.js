@@ -1,137 +1,112 @@
 import React, { Component } from 'react';
-import { Field, reduxForm } from 'redux-form';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+
+import SweetAlert from 'react-bootstrap-sweetalert';
 
 import { push } from 'react-router-redux';
 
 import '../../style/style.css';
 import '../../style/signUp.css';
 
-// import axios from 'axios';
 async function submitToServer(data) {
   try {
     let response = await fetch('http://www.localhost:8000/register', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+         Accept: 'application/json'
       },
       body: JSON.stringify(data),
+      credentials : 'include',
     });
-    let responseJSON = await response.json();
-    return responseJSON;
+    let responseJSONUser = await response.json();
+    return responseJSONUser;
   }
   catch(error) {
     console.log('Error connecting to server');
   }
 }
-
-async function getFromServer() {
-  try {
-    let response = await fetch('http://www.localhost:8000/session', {
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    });
-    let responseJSON = await response.json();
-    return responseJSON;
-  }
-  catch(error) {
-    console.log('Error connecting to server');
-  }
-}
-
-const validate = values => {
-  const errors = {}
-  if (!values.email) {
-    errors.email = 'Please enter your email address.'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
-  }
-  if (!values.password) {
-    errors.password = 'Please choose a password'
-  } else if (values.password.length < 6) {
-      errors.password = 'Minimum 6 characters required'
-  }
-  if (values.password !== values.confirmPassword) {
-    errors.confirmPassword = 'Passwords do not match'
-  }
-  return errors
-}
-
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-    <div>
-      <input {...input} type={type} placeholder={label} className="signupField"/>
-      {touched && (<div style={{ color:'#f57261', fontSize: 14 }}>{error}</div>)}
-    </div>
-)
 
 class SignUp extends Component {
+  constructor() {
+    super();
+    this.state = {
+      alert: null
+    };
+  }
+
+  displayAlert(value) {
+    const getAlert = () => (
+      <SweetAlert 
+        title={
+          <div style={{ textAlign: 'center', margin: 'auto' }}>
+              <i 
+                class="fa fa-exclamation-circle" 
+                aria-hidden="true" 
+                style={{ color: '#f57261', marginRight: 10 }}>
+              </i>
+              {value}
+          </div>
+            } 
+        onConfirm={() => this.hideAlert()}>
+      </SweetAlert>
+    );
+
+    this.setState({
+      alert: getAlert()
+    });
+  }
+
+  hideAlert() {
+    this.setState({
+      alert: null
+    });
+  }
+
   submit = (values) => {
-    submitToServer(values)
-    .then (
-      data => console.log(data)
-    )
-    .then (
-      getFromServer()
-      .then (
-        data => console.log(data)
-      )
-  );
-    // axios.post('http://localhost:8000/register', values, {
-    //             headers: {'Content-Type': 'application/json'}
-    //           })
-    //     // .then(res => {
-    //     //   this.props.dispatch(push('/dashboard'));
-    //     // })
-    //     // .catch(err => {
-    //     //   console.log("Error connecting with server");
-    //     // });
-    //     .then(res => {
-    //       console.log(res.data);
-    //     })
-    //     .then (
-    //       axios.get('http://localhost:8000/session', {
-    //             headers: {'Content-Type': 'application/json'}
-    //           })
-    //           .then(res => {
-    //               // this.setState({ userName: res.data.email });
-    //               console.log(res.data);
-    //           })
-    //           .catch(err => {
-    //               console.log('Error: Could not access user');
-    //           })
-    //     );
+    return submitToServer(values)
+    .then(res => {
+      if (res.message) {
+        this.displayAlert(res.message);
+        throw new SubmissionError();
+      } else {
+        console.log('success');
+      }
+    })
+    .then(res => {
+      this.props.dispatch(push('/dashboard'))
+    });
   }
   render() {
     return(
           <div className="signupForm">
             <i className="fa fa-music fa-3x" aria-hidden="true"></i>
             <h4 style={{ fontSize: 28, fontWeight: 700, marginBottom: 16 }}>JamHeart</h4>
-            
+            {this.state.alert}
             <form onSubmit={ this.props.handleSubmit(this.submit) }>
               <div>
                 <Field
                   name="email" 
-                  component={renderField} 
+                  component="input" 
                   type="email" 
                   label="Email Address"
-                  />
+                  className="signupField"/>
               </div>
               <div>
                 <Field
                   name="password" 
-                  component={renderField} 
+                  component="input"
                   type="password" 
                   label="Password"
-                  />
+                  className="signupField"/>
               </div>
               <div>
                 <Field
                   name="confirmPassword" 
-                  component={renderField} 
+                  component="input" 
                   type="password" 
                   label="Confirm Password"
-                  />
+                  className="signupField"/>
               </div>
               {/* <div>
                 <Field
@@ -139,7 +114,7 @@ class SignUp extends Component {
                   type="text"
                   component={renderField}
                   label="Display Name (Optional)"
-              />
+                  className="signupField"/>
               </div> */}
               <div style={{ color: '#818181', marginTop: 24 }}>
                   <div style={{ fontSize: 12 }}>
@@ -159,5 +134,4 @@ class SignUp extends Component {
 
 export default reduxForm ({
   form: 'signup',
-  validate,
 })(SignUp)

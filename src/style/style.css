@@ -19,3 +19,25 @@ a:focus {
 .btn:focus, .btn:active {
    outline: none !important;
 }
+
+.sweet-alert .btn-primary {
+    padding: 5px 35px !important;
+    background-color: #f57261;
+    color: white !important;
+    outline: none !important;
+    border: transparent !important;
+}
+
+.sweet-alert .btn-primary:active:focus, .sweet-alert .btn-primary:hover {
+    background-color: #a34c42;
+    color: white !important;
+    outline: none !important;
+    border: transparent !important;
+}
+
+.sweet-alert h2{
+  color: #f57261 !important;
+  font-family: 'Roboto', sans-serif !important;
+  font-size: 23px;
+  font-weight: 500;
+}

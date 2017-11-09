@@ -1,53 +1,96 @@
-import React from 'react';
-import { Field, reduxForm } from 'redux-form';
+import React, { Component } from 'react';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+
+import SweetAlert from 'react-bootstrap-sweetalert';
+
+import { push } from 'react-router-redux';
 
 import '../../style/style.css';
 import '../../style/login.css';
 
-const validate = values => {
-  const errors = {}
-  if (!values.email) {
-    errors.email = 'Please enter your JamHeart email address.'
-  } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address'
+async function submitToServer(data) {
+  try {
+    let response = await fetch('http://www.localhost:8000/login', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+         Accept: 'application/json'
+      },
+      body: JSON.stringify(data),
+      credentials : 'include',
+    });
+    let responseJSONUser = await response.json();
+    return responseJSONUser;
   }
-  if (!values.password) {
-    errors.password = 'Please enter your password'
+  catch(error) {
+    console.log('Error connecting to server');
   }
-  return errors
 }
 
-const renderField = ({ input, label, type, meta: { touched, error } }) => (
-    <div>
-      <input {...input} type={type} placeholder={label} className="loginField"/>
-      {touched && (<div style={{ color:'#f57261', fontSize: 14 }}>{error}</div>)}
-    </div>
-)
+class LoginForm extends Component {
+  constructor() {
+    super();
+    this.state = {
+      alert: null
+    };
+  }
 
-const LoginForm = (props) => {
-    const { handleSubmit } = props;
+  displayAlert(value) {
+    const getAlert = () => (
+      <SweetAlert 
+        title={value} 
+        onConfirm={() => this.hideAlert()}>
+      </SweetAlert>
+    );
 
+    this.setState({
+      alert: getAlert()
+    });
+  }
+
+  hideAlert() {
+    this.setState({
+      alert: null
+    });
+  }  
+
+  submit = (values) => {
+    return submitToServer(values)
+    .then(res => {
+      if (res.message) {
+        this.displayAlert(res.message);
+        throw new SubmissionError();
+      } else {
+        console.log('success');
+      }
+    })
+    .then(res => {
+      this.props.dispatch(push('/dashboard'))
+    });
+  }
+
+  render() {
     return (
         <div className="loginForm">
           <i className="fa fa-music fa-3x" aria-hidden="true"></i>
           <h4 style={{ fontSize: 28, fontWeight: 700, marginBottom: 16 }}>JamHeart</h4>
-          
-          <form onSubmit={ handleSubmit }>
+          {this.state.alert}
+          <form onSubmit={ this.props.handleSubmit(this.submit) }>
             <div>
               <Field
                 name="email" 
-                component={renderField} 
+                component="input" 
                 type="email" 
                 label="Email Address"
-                />
+                className="loginField"/>
             </div>
             <div>
               <Field
                 name="password" 
-                component={renderField} 
+                component="input" 
                 type="password" 
                 label="Password"
-                />
+                className="loginField"/>
             </div>
             <div className="loginCheckBox">
                 <Field
@@ -55,7 +98,7 @@ const LoginForm = (props) => {
                   id="remember"
                   component="input"
                   type="checkbox"
-                />
+                  />
                 <label htmlFor="remember" style={{ marginLeft: 8 }}>Remember Me</label>
             </div>
             <button type="submit" className="logInButton">Log In</button>
@@ -70,10 +113,10 @@ const LoginForm = (props) => {
           </form>
         </div>
     );
+  }
 }
 
 
 export default reduxForm ({
   form: 'login',
-  validate,
 })(LoginForm)

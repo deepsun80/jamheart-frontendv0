@@ -1,32 +1,68 @@
 import React, {Component} from 'react';
 import { DropdownButton, MenuItem } from 'react-bootstrap';
 
-import axios from 'axios';
-
 import '../style/style.css';
 import '../style/userAuth.css';
+
+import { push } from 'react-router-redux';
+import { connect } from 'react-redux';
+
+async function getFromServer() {
+  try {
+    let response = await fetch('http://www.localhost:8000/session', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    let responseJSONSession = await response.json();
+    return responseJSONSession;
+  }
+  catch(error) {
+    console.log('Error connecting to server');
+  }
+}
+
+async function logOutUser() {
+  try {
+    let response = await fetch('http://www.localhost:8000/logout', {
+      method: 'GET',
+      headers: {
+        Accept: 'application/json',
+        'Content-Type': 'application/json',
+      },
+      credentials: 'include',
+    });
+    let responseLogoutSession = await response.json();
+    return responseLogoutSession;
+  }
+  catch(error) {
+    console.log('Error connecting to server');
+  }
+}
 
 class UserAuth extends Component {
     constructor(){
         super();
         this.state = {
-            userName: 'TestUser'
+            userName: ''
         }
     }
 
-    loadUserFromServer = () => {
-        axios.get('http://localhost:8000/session')
-            .then(res => {
-                // this.setState({ userName: res.data.email });
-                console.log(res.data);
-            })
-            .catch(err => {
-                console.log('Error: Could not access user');
-            });
+    componentDidMount() {
+        getFromServer()
+        .then (res => {
+            this.setState({ userName: res.email })
+        });
     }
 
-    componentDidMount() {
-        this.loadUserFromServer();
+    logOut = () => {
+        logOutUser()
+        .then(res => {
+            this.props.dispatch(push('/'))
+        });
     }
 
     render() {
@@ -47,11 +83,11 @@ class UserAuth extends Component {
                         </i>} 
                         id="bg-nested-dropdown">
                     <MenuItem eventKey="2">Account Settings</MenuItem>
-                    <MenuItem eventKey="1">Logout</MenuItem>
+                    <MenuItem eventKey="1" onClick={this.logOut}>Logout</MenuItem>
                 </DropdownButton>
             </div>
         );
     }
 }
 
-export default UserAuth;
+export default connect()(UserAuth);
